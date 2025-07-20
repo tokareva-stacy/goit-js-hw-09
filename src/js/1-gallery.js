@@ -1,68 +1,95 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const images = [
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rattlesnake-4200292__340.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rabbits-4202826__340.jpg",
     original:
-      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rattlesnake-4200292_1280.jpg",
-    description: "Rattlesnake",
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rabbits-4202826_1280.jpg",
+    description: "Rabits setting on a log",
   },
   {
     preview:
       "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg",
     original:
       "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg",
-    description: "Container",
+    description: "Container ship in a harbor",
   },
   {
     preview:
       "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg",
     original:
       "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg",
-    description: "Beach",
+    description: "Wooden pier on a beach",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/11/lion-4208155__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/11/lion-4208155_1280.jpg",
+    description: "Lion in the wilderness",
   },
   {
     preview:
       "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg",
     original:
       "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg",
-    description: "Flower bouquet",
+    description: "A group of colorful flowers",
   },
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546__340.jpg",
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg",
     original:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546_1280.jpg",
-    description: "Scope",
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg",
+    description: "Mountain landscape with a lake",
   },
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/16/09/47/ocean-4206786__340.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-ancient-ruins-4208801__340.jpg",
     original:
-      "https://cdn.pixabay.com/photo/2019/05/16/09/47/ocean-4206786_1280.jpg",
-    description: "Ocean",
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-ancient-ruins-4208801_1280.jpg",
+    description: "Ancient ruins with columns",
   },
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546__340.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg",
     original:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546_1280.jpg",
-    description: "Scope",
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg",
+    description: "Sunset over a vast landscape",
   },
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546__340.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg",
     original:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546_1280.jpg",
-    description: "Scope",
-  },
-  {
-    preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546__340.jpg",
-    original:
-      "https://cdn.pixabay.com/photo/2019/05/14/19/43/scope-4200546_1280.jpg",
-    description: "Scope",
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
+    description: "Lighthouse on a rocky shore",
   },
 ];
+
+const galleryEl = document.querySelector('.gallery');
+
+function createGalleryMarkup(images) {
+  return images
+    .map(
+      ({ preview, original, description }) => `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${original}">
+        <img
+          class="gallery-image"
+          src="${preview}"
+          alt="${description}"
+        />
+      </a>
+    </li>
+    `
+    )
+    .join('');
+}
+
+galleryEl.innerHTML = createGalleryMarkup(images);
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
